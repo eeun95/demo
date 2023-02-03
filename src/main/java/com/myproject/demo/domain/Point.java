@@ -3,7 +3,8 @@ package com.myproject.demo.domain;
 import jakarta.persistence.Entity;
 
 @Entity
-public class Member {
+public class Point {
     private Long id;
-    private Long pointId;
+    private Long memberId;
+    private int point;
 }
