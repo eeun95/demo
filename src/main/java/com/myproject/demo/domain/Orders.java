@@ -1,12 +1,20 @@
 package com.myproject.demo.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Orders {
-    @Id
+    @Id @GeneratedValue
     private Long id;
-    //private Map<String, Integer> receipt = new HashMap<>();
-    private int price;
+
+    private Long memberId;
+
+    @ManyToOne
+    @JoinColumn(name="RECEIPT_ID")
+    private Receipt receipt;
+
+    private int totalPrice;
 }
