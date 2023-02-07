@@ -12,9 +12,5 @@ public class Orders {
 
     private Long memberId;
 
-    @ManyToOne
-    @JoinColumn(name="RECEIPT_ID")
-    private Receipt receipt;
-
     private int totalPrice;
 }

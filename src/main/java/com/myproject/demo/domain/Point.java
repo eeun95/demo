@@ -1,15 +1,28 @@
 package com.myproject.demo.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Point {
     @Id @GeneratedValue
     private Long id;
 
     private Long memberId;
 
-    private int point;
+    private int totalPoint;
+
+    public void updatePoint(int point) {
+        this.totalPoint = this.totalPoint+point;
+    }
 }
