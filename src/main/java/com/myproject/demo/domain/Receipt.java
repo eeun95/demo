@@ -15,7 +15,7 @@ public class Receipt {
     @Id @GeneratedValue
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="ORDERS_ID")
     private Orders orders;
 

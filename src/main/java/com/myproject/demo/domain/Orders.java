@@ -21,6 +21,7 @@ public class Orders {
 
     private Long memberId;
 
+    @Builder.Default
     @OneToMany(mappedBy = "orders")
     private List<Receipt> receipts = new ArrayList<>();
 
@@ -30,5 +31,8 @@ public class Orders {
 
     public void setTotalPrice(int amount) {
         this.totalPrice = amount;
+    }
+    public void setReceipts(Receipt receipt) {
+        getReceipts().add(receipt);
     }
 }

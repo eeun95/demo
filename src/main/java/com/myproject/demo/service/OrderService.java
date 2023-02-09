@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +32,6 @@ public class OrderService {
     public Orders order(OrderRequest orderRequest) {
         Long memberId = orderRequest.getMemberId();
         Map<String, Integer> map = orderRequest.getMenu();
-        log.info("menu {}{}",memberId, map);
 
         Orders orders = Orders.builder()
                 .memberId(memberId)
@@ -40,10 +40,11 @@ public class OrderService {
 
         List<Coffee> coffeeList = menuRepository.findAll();
 
-        Map<CoffeeCategory, Integer> priceList = new HashMap<>();
+        Map<String, Integer> priceList = new HashMap<>();
         for (Coffee coffee : coffeeList) {
-            priceList.put(coffee.getName(), coffee.getPrice());
+            priceList.put(String.valueOf(coffee.getName()), coffee.getPrice());
         }
+        log.info("menu {}{}",priceList, coffeeList);
 
         int totalPrice = 0;
         for (String coffeeName : map.keySet()) {
@@ -56,9 +57,12 @@ public class OrderService {
                     .price(price)
                     .build();
             receiptRepository.save(receipt);
+            orders.setReceipts(receipt);
         }
         orders.setTotalPrice(totalPrice);
-        orderRepository.save(orders);
-        return orders;
+        Orders saveOrders = orderRepository.save(orders);
+
+        log.info("receipt {}", saveOrders.getReceipts());
+        return saveOrders;
     }
 }

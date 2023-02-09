@@ -1,6 +1,8 @@
 package com.myproject.demo.controller;
 
+import com.myproject.demo.domain.Orders;
 import com.myproject.demo.request.OrderRequest;
+import com.myproject.demo.response.OrderResponse;
 import com.myproject.demo.service.OrderService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +19,9 @@ public class OrderController {
     @ApiOperation("커피 주문 API")
     @PostMapping("")
     public ResponseEntity order(@RequestBody OrderRequest orderRequest) {
-        orderService.order(orderRequest);
-
-        return ResponseEntity.ok(null);
+        Orders orders = orderService.order(orderRequest);
+        OrderResponse response = new OrderResponse(orders);
+        return ResponseEntity.ok(response);
     }
 
     @ApiOperation("커피 결제 API")
