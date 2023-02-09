@@ -1,17 +1,23 @@
 package com.myproject.demo.controller;
 
+import com.myproject.demo.request.OrderRequest;
+import com.myproject.demo.service.OrderService;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/order")
+@RequiredArgsConstructor
 public class OrderController {
 
+    private final OrderService orderService;
+
     @ApiOperation("커피 주문 API")
-    public ResponseEntity order() {
+    @PostMapping("")
+    public ResponseEntity order(@RequestBody OrderRequest orderRequest) {
+        orderService.order(orderRequest);
 
         return ResponseEntity.ok(null);
     }

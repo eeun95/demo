@@ -2,6 +2,7 @@ package com.myproject.demo.controller;
 
 import com.myproject.demo.domain.Point;
 import com.myproject.demo.request.PointRequest;
+import com.myproject.demo.response.PointResponse;
 import com.myproject.demo.service.PointService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,6 @@ public class PointController {
     @PostMapping("")
     public ResponseEntity charge(PointRequest pointRequest) {
         Point point = pointService.charge(pointRequest);
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(new PointResponse(point));
     }
 }

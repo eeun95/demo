@@ -2,8 +2,8 @@ package com.myproject.demo.service;
 
 import com.myproject.demo.domain.Point;
 import com.myproject.demo.domain.PointHistory;
-import com.myproject.demo.repository.PointHistoryRepository;
-import com.myproject.demo.repository.PointRepository;
+import com.myproject.demo.repository.point.PointHistoryRepository;
+import com.myproject.demo.repository.point.PointRepository;
 import com.myproject.demo.request.PointRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +13,6 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class PointService {
 
     private final PointRepository pointRepository;
@@ -24,7 +23,6 @@ public class PointService {
         Long memberId = pointRequest.getMemberId();
         Optional<Point> point = pointRepository.findByMemberId(memberId);
 
-        log.info("request {}", pointRequest);
         Point p = null;
         if (point.isEmpty()) {
 

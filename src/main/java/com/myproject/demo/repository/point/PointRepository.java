@@ -1,4 +1,4 @@
-package com.myproject.demo.repository;
+package com.myproject.demo.repository.point;
 
 import com.myproject.demo.domain.Point;
 import org.springframework.data.jpa.repository.JpaRepository;

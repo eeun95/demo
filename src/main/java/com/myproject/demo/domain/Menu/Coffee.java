@@ -11,7 +11,6 @@ public class Coffee {
     @Id @GeneratedValue
     private Long id;
 
-    @Enumerated(value = EnumType.STRING)
     private CoffeeCategory name;
 
     private int price;
