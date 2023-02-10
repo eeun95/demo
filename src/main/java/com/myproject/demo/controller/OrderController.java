@@ -16,20 +16,15 @@ public class OrderController {
 
     private final OrderService orderService;
 
+    private final PointController pointController;
+
     @ApiOperation("커피 주문 API")
     @PostMapping("")
     public ResponseEntity order(@RequestBody OrderRequest orderRequest) {
         Orders orders = orderService.order(orderRequest);
         OrderResponse response = new OrderResponse(orders);
-        return ResponseEntity.ok(response);
+        ResponseEntity pay = pointController.pay(response);
+        return ResponseEntity.ok(pay);
     }
-
-    @ApiOperation("커피 결제 API")
-    @GetMapping("/pay")
-    public ResponseEntity pay() {
-
-        return ResponseEntity.ok(null);
-    }
-
 
 }

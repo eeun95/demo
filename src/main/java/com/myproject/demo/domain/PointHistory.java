@@ -17,4 +17,6 @@ public class PointHistory {
     private Point point;
 
     private int chargePoint;
+
+    private int usePoint;
 }

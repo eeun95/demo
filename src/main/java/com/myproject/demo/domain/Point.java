@@ -23,6 +23,6 @@ public class Point {
     private int totalPoint;
 
     public void updatePoint(int point) {
-        this.totalPoint = this.totalPoint+point;
+        this.totalPoint = point;
     }
 }
