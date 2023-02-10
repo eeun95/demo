@@ -12,13 +12,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Coffee {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(value = EnumType.STRING)
     private CoffeeCategory name;
 
     private int price;
-
-    private boolean hot;
 }

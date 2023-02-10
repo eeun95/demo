@@ -22,26 +22,6 @@ public class MenuService {
     private final ReceiptRepository receiptRepository;
 
     public List<Coffee> show() {
-        menuRepository.save(Coffee.builder()
-                .name(CoffeeCategory.Americano)
-                .price(4500)
-                .build());
-        menuRepository.save(Coffee.builder()
-                .name(CoffeeCategory.Cappuccino)
-                .price(5000)
-                .build());
-        menuRepository.save(Coffee.builder()
-                .name(CoffeeCategory.Coldbrew)
-                .price(5500)
-                .build());
-        menuRepository.save(Coffee.builder()
-                .name(CoffeeCategory.Latte)
-                .price(5000)
-                .build());
-        menuRepository.save(Coffee.builder()
-                .name(CoffeeCategory.Espresso)
-                .price(3000)
-                .build());
         return menuRepository.findAll();
     }
 
