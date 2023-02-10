@@ -1,6 +1,5 @@
 package com.myproject.demo.repository;
 
-import com.myproject.demo.domain.Menu.Coffee;
 import com.myproject.demo.domain.Receipt;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

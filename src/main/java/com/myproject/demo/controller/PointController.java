@@ -1,6 +1,5 @@
 package com.myproject.demo.controller;
 
-import com.myproject.demo.Exception.ExceptionResponse;
 import com.myproject.demo.domain.Point;
 import com.myproject.demo.request.PointRequest;
 import com.myproject.demo.response.OrderResponse;

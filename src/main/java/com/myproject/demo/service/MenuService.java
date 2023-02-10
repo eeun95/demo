@@ -1,8 +1,6 @@
 package com.myproject.demo.service;
 
 import com.myproject.demo.domain.Menu.Coffee;
-import com.myproject.demo.domain.Menu.CoffeeCategory;
-import com.myproject.demo.domain.Receipt;
 import com.myproject.demo.repository.MenuRepository;
 import com.myproject.demo.repository.ReceiptRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,21 +1,17 @@
 package com.myproject.demo.service;
 
 import com.myproject.demo.domain.Menu.Coffee;
-import com.myproject.demo.domain.Menu.CoffeeCategory;
 import com.myproject.demo.domain.Orders;
 import com.myproject.demo.domain.Receipt;
 import com.myproject.demo.repository.MenuRepository;
 import com.myproject.demo.repository.OrderRepository;
 import com.myproject.demo.repository.ReceiptRepository;
 import com.myproject.demo.request.OrderRequest;
-import jakarta.persistence.criteria.Order;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

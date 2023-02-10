@@ -23,6 +23,7 @@ public class OrderController {
     public ResponseEntity order(@RequestBody OrderRequest orderRequest) {
         Orders orders = orderService.order(orderRequest);
         OrderResponse response = new OrderResponse(orders);
+
         ResponseEntity pay = pointController.pay(response);
         return ResponseEntity.ok(pay);
     }
