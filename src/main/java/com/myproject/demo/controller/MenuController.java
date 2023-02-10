@@ -22,6 +22,7 @@ public class MenuController {
 
     private final MenuService menuService;
 
+
     @ApiOperation("커피 메뉴 목록 조회 API")
     @GetMapping("/show")
     public ResponseEntity show() {
@@ -36,7 +37,6 @@ public class MenuController {
     @ApiOperation("인기메뉴 목록 조회 API")
     @GetMapping("/hot")
     public ResponseEntity hot() {
-
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(menuService.hot());
     }
 }
