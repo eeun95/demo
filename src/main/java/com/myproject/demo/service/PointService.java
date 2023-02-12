@@ -5,7 +5,8 @@ import com.myproject.demo.domain.Point;
 import com.myproject.demo.domain.PointHistory;
 import com.myproject.demo.repository.point.PointHistoryRepository;
 import com.myproject.demo.repository.point.PointRepository;
-import com.myproject.demo.request.PointRequest;
+import com.myproject.demo.Dto.request.PointRequestDto;
+import com.myproject.demo.Dto.response.OrderResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,8 @@ public class PointService {
 
     private final PointHistoryRepository pointHistoryRepository;
 
-    public Point charge(PointRequest pointRequest) {
-        Long memberId = pointRequest.getMemberId();
+    public Point charge(PointRequestDto pointRequestDto) {
+        Long memberId = pointRequestDto.getMemberId();
         Optional<Point> point = pointRepository.findByMemberId(memberId);
 
         Point p = null;
@@ -30,42 +31,46 @@ public class PointService {
 
             p = Point.builder()
                     .memberId(memberId)
-                    .totalPoint(pointRequest.getPoint())
+                    .totalPoint(pointRequestDto.getPoint())
                     .build();
 
         } else {
             p = point.get();
-            p.updatePoint(p.getTotalPoint()+pointRequest.getPoint());
+            p.updatePoint(p.getTotalPoint()+ pointRequestDto.getPoint());
         }
 
         Point savePoint = pointRepository.save(p);
 
         pointHistoryRepository.save(PointHistory.builder()
                 .point(p)
-                .chargePoint(pointRequest.getPoint())
+                .chargePoint(pointRequestDto.getPoint())
                 .build());
 
         return savePoint;
     }
 
-    public Object pay(Long memberId, int totalPrice) {
-        Point memberPoint = pointRepository.findByMemberId(memberId).get();
-        if(memberPoint==null) {
+    public Object pay(OrderResponseDto orderResponseDto) {
+        Long memberId = orderResponseDto.getMemberId();
+        int totalPrice = orderResponseDto.getTotalPrice();
+        Optional<Point> pointObj = pointRepository.findByMemberId(memberId);
+        if(pointObj.isEmpty()) {
             return new ExceptionResponse(memberId, "존재하는 회원이 없습니다.");
-        }
-        if(memberPoint.getTotalPoint() < totalPrice) {
-            return new ExceptionResponse(memberId, "포인트가 부족합니다.");
         } else {
-            int remainPoint = memberPoint.getTotalPoint() - totalPrice;
-            log.info("remainPoint {}", remainPoint);
-            memberPoint.updatePoint(remainPoint);
-            pointRepository.save(memberPoint);
+            Point memberPoint = pointObj.get();
+            if (memberPoint.getTotalPoint() < totalPrice) {
+                return new ExceptionResponse(memberId, "포인트가 부족합니다.");
+            } else {
+                int remainPoint = memberPoint.getTotalPoint() - totalPrice;
+                log.info("remainPoint {}", remainPoint);
+                memberPoint.updatePoint(remainPoint);
+                pointRepository.save(memberPoint);
 
-            pointHistoryRepository.save(PointHistory.builder()
-                    .point(memberPoint)
-                    .usePoint(totalPrice)
-                    .build());
+                pointHistoryRepository.save(PointHistory.builder()
+                        .point(memberPoint)
+                        .usePoint(totalPrice)
+                        .build());
+            }
+            return memberPoint;
         }
-        return memberPoint;
     }
 }

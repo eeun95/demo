@@ -1,8 +1,8 @@
 package com.myproject.demo.controller;
 
 import com.myproject.demo.domain.Orders;
-import com.myproject.demo.request.OrderRequest;
-import com.myproject.demo.response.OrderResponse;
+import com.myproject.demo.Dto.request.OrderRequestDto;
+import com.myproject.demo.Dto.response.OrderResponseDto;
 import com.myproject.demo.service.OrderService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +20,9 @@ public class OrderController {
 
     @ApiOperation("커피 주문 API")
     @PostMapping("")
-    public ResponseEntity order(@RequestBody OrderRequest orderRequest) {
-        Orders orders = orderService.order(orderRequest);
-        OrderResponse response = new OrderResponse(orders);
+    public ResponseEntity order(@RequestBody OrderRequestDto orderRequestDto) {
+        Orders orders = orderService.order(orderRequestDto);
+        OrderResponseDto response = new OrderResponseDto(orders);
 
         ResponseEntity pay = pointController.pay(response);
         return ResponseEntity.ok(pay);

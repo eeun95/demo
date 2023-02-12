@@ -1,7 +1,7 @@
 package com.myproject.demo.controller;
 
 import com.myproject.demo.domain.Menu.Coffee;
-import com.myproject.demo.response.MenuResponse;
+import com.myproject.demo.Dto.response.MenuResponseDto;
 import com.myproject.demo.service.MenuService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -24,12 +24,12 @@ public class MenuController {
 
 
     @ApiOperation("커피 메뉴 목록 조회 API")
-    @GetMapping("/show")
+    @GetMapping("")
     public ResponseEntity show() {
         List<Coffee> coffeeList = menuService.show();
-        List<MenuResponse> response = new ArrayList<>();
+        List<MenuResponseDto> response = new ArrayList<>();
         for (Coffee c : coffeeList) {
-            response.add(new MenuResponse(c));
+            response.add(new MenuResponseDto(c));
         }
         return ResponseEntity.ok(response);
     }

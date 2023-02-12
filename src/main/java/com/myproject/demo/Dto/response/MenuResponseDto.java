@@ -1,15 +1,15 @@
-package com.myproject.demo.response;
+package com.myproject.demo.Dto.response;
 
 import com.myproject.demo.domain.Menu.Coffee;
 import lombok.Data;
 
 @Data
-public class MenuResponse {
+public class MenuResponseDto {
     private Long id;
     private String coffeeName;
     private int price;
 
-    public MenuResponse(Coffee coffee) {
+    public MenuResponseDto(Coffee coffee) {
         this.id = coffee.getId();
         this.coffeeName = String.valueOf(coffee.getName());
         this.price = coffee.getPrice();

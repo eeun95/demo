@@ -1,4 +1,4 @@
-package com.myproject.demo.response;
+package com.myproject.demo.Dto.response;
 
 import com.myproject.demo.domain.Orders;
 import com.myproject.demo.domain.Receipt;
@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.Map;
 
 @Data
-public class OrderResponse {
+public class OrderResponseDto {
     private Long memberId;
     private Map<String, Integer> receipt;
     private int totalPrice;
     private LocalDateTime orderDate;
 
-    public OrderResponse(Orders order) {
+    public OrderResponseDto(Orders order) {
         this.memberId = order.getMemberId();
         this.receipt = makeReceipt(order.getReceipts());
         this.totalPrice = order.getTotalPrice();
