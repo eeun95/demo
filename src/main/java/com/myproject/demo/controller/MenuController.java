@@ -25,13 +25,13 @@ public class MenuController {
 
     @ApiOperation("커피 메뉴 목록 조회 API")
     @GetMapping("")
-    public ResponseEntity show() {
+    public List<MenuResponseDto> show() {
         List<Coffee> coffeeList = menuService.show();
         List<MenuResponseDto> response = new ArrayList<>();
         for (Coffee c : coffeeList) {
             response.add(new MenuResponseDto(c));
         }
-        return ResponseEntity.ok(response);
+        return response;
     }
 
     @ApiOperation("인기메뉴 목록 조회 API")

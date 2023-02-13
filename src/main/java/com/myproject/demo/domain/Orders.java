@@ -12,10 +12,16 @@ import java.util.List;
 
 @Entity
 @Getter
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class Orders {
+
+    @Builder
+    public Orders(Long memberId, LocalDateTime orderDate) {
+        this.memberId = memberId;
+        this.receipts = new ArrayList<>();
+        this.orderDate = orderDate;
+    }
+
     @Id @GeneratedValue
     private Long id;
 
