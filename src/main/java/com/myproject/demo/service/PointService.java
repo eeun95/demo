@@ -16,7 +16,7 @@ import java.util.Optional;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class PointService {
+public class PointService implements PointServiceInterface{
 
     private final PointRepository pointRepository;
 
@@ -49,16 +49,17 @@ public class PointService {
         return savePoint;
     }
 
-    public Object pay(OrderResponseDto orderResponseDto) {
+    public Point pay(OrderResponseDto orderResponseDto) {
         Long memberId = orderResponseDto.getMemberId();
         int totalPrice = orderResponseDto.getTotalPrice();
         Optional<Point> pointObj = pointRepository.findByMemberId(memberId);
+        Point memberPoint = null;
         if(pointObj.isEmpty()) {
-            return new ExceptionResponse(memberId, "존재하는 회원이 없습니다.");
+            new ExceptionResponse(memberId, "존재하는 회원이 없습니다.");
         } else {
-            Point memberPoint = pointObj.get();
+            memberPoint = pointObj.get();
             if (memberPoint.getTotalPoint() < totalPrice) {
-                return new ExceptionResponse(memberId, "포인트가 부족합니다.");
+                new ExceptionResponse(memberId, "포인트가 부족합니다.");
             } else {
                 int remainPoint = memberPoint.getTotalPoint() - totalPrice;
                 log.info("remainPoint {}", remainPoint);
@@ -70,7 +71,7 @@ public class PointService {
                         .usePoint(totalPrice)
                         .build());
             }
-            return memberPoint;
         }
+        return memberPoint;
     }
 }

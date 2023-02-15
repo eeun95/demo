@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class MenuService {
+public class MenuService implements MenuServiceInterface {
 
     private final MenuRepository menuRepository;
 

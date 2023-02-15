@@ -6,7 +6,6 @@ import com.myproject.demo.service.MenuService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,7 +35,7 @@ public class MenuController {
 
     @ApiOperation("인기메뉴 목록 조회 API")
     @GetMapping("/hot")
-    public ResponseEntity hot() {
-        return ResponseEntity.ok(menuService.hot());
+    public List<String> hot() {
+        return menuService.hot();
     }
 }

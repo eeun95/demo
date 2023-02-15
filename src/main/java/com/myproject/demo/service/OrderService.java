@@ -19,7 +19,7 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class OrderService {
+public class OrderService implements OrderServiceInterface{
     private final OrderRepository orderRepository;
 
     private final ReceiptRepository receiptRepository;
