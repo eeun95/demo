@@ -7,9 +7,13 @@ spring:
     jpa:
       properties:
         hibernate:
-          show_sql: true
+          #show_sql: true
+          format_sql: true
           ddl-auto: create
 server:
   error:
     include-message: always
     #include-binding-errors: always 바인딩 에러 포함
+logging.level:
+  org.hibernate.SQL: debug
+  org.hibernate.type: trace
