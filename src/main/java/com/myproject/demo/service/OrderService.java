@@ -59,7 +59,7 @@ public class OrderService implements OrderServiceInterface{
         orders.setTotalPrice(totalPrice);
         Orders saveOrders = orderRepository.save(orders);
 
-        log.info("receipt {}", saveOrders.getReceipts());
+        //log.info("receipt {}", saveOrders.getReceipts());
         return saveOrders;
     }
 }

@@ -1,6 +1,9 @@
 package com.myproject.demo.service;
 
+import com.myproject.demo.Exception.ErrorCode;
 import com.myproject.demo.Exception.ExceptionResponse;
+import com.myproject.demo.Exception.LackOfPointException;
+import com.myproject.demo.Exception.MemberNotFoundException;
 import com.myproject.demo.domain.Point;
 import com.myproject.demo.domain.PointHistory;
 import com.myproject.demo.repository.point.PointHistoryRepository;
@@ -9,7 +12,11 @@ import com.myproject.demo.Dto.request.PointRequestDto;
 import com.myproject.demo.Dto.response.OrderResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.ErrorResponse;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.Optional;
 
@@ -53,13 +60,13 @@ public class PointService implements PointServiceInterface{
         Long memberId = orderResponseDto.getMemberId();
         int totalPrice = orderResponseDto.getTotalPrice();
         Optional<Point> pointObj = pointRepository.findByMemberId(memberId);
-        Point memberPoint = null;
+
         if(pointObj.isEmpty()) {
-            new ExceptionResponse(memberId, "존재하는 회원이 없습니다.");
+            throw new MemberNotFoundException();
         } else {
-            memberPoint = pointObj.get();
+            Point memberPoint = pointObj.get();
             if (memberPoint.getTotalPoint() < totalPrice) {
-                new ExceptionResponse(memberId, "포인트가 부족합니다.");
+                throw new LackOfPointException();
             } else {
                 int remainPoint = memberPoint.getTotalPoint() - totalPrice;
                 log.info("remainPoint {}", remainPoint);
@@ -70,8 +77,8 @@ public class PointService implements PointServiceInterface{
                         .point(memberPoint)
                         .usePoint(totalPrice)
                         .build());
+                return memberPoint;
             }
         }
-        return memberPoint;
     }
 }

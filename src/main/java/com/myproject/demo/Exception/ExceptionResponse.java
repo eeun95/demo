@@ -1,14 +1,15 @@
 package com.myproject.demo.Exception;
 
+import lombok.Data;
 import lombok.Getter;
 
-@Getter
+@Data
 public class ExceptionResponse {
-    private Long id;
+    private ErrorCode code;
     private String errorMsg;
 
-    public ExceptionResponse(Long id, String errorMsg) {
-        this.id = id;
-        this.errorMsg = errorMsg;
+    public ExceptionResponse(ErrorCode code) {
+        this.code = code;
+        this.errorMsg = code.getMessage();
     }
 }
