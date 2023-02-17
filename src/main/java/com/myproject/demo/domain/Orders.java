@@ -21,6 +21,9 @@ public class Orders {
         this.receipts = new ArrayList<>();
         this.orderDate = orderDate;
     }
+    public Orders() {
+
+    }
 
     @Id @GeneratedValue
     private Long id;

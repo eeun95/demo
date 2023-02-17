@@ -5,7 +5,7 @@ import com.myproject.demo.domain.Orders;
 import com.myproject.demo.domain.Receipt;
 import com.myproject.demo.repository.MenuRepository;
 import com.myproject.demo.repository.OrderRepository;
-import com.myproject.demo.repository.ReceiptRepository;
+import com.myproject.demo.repository.Receipt.ReceiptRepository;
 import com.myproject.demo.Dto.request.OrderRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
