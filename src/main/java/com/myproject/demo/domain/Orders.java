@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Getter
-@AllArgsConstructor
 public class Orders {
 
     @Builder
@@ -21,16 +21,12 @@ public class Orders {
         this.receipts = new ArrayList<>();
         this.orderDate = orderDate;
     }
-    public Orders() {
-
-    }
 
     @Id @GeneratedValue
     private Long id;
 
     private Long memberId;
 
-    @Builder.Default
     @OneToMany(mappedBy = "orders")
     private List<Receipt> receipts = new ArrayList<>();
 

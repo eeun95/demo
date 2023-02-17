@@ -24,10 +24,10 @@ class MenuServiceTest {
     @Autowired
     EntityManager em;
 
-    JPAQueryFactory queryFactory;
-
     @Autowired
     MenuRepository menuRepository;
+
+    JPAQueryFactory queryFactory;
 
     @BeforeEach
     public void before() {

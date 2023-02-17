@@ -6,11 +6,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Map;
+
 @Entity
 @Getter
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class Receipt {
     @Id @GeneratedValue
     private Long id;
@@ -24,4 +24,5 @@ public class Receipt {
     private int count;
 
     private int price;
+
 }
