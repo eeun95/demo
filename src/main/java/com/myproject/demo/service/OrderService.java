@@ -24,9 +24,8 @@ public class OrderService implements OrderServiceInterface{
 
     private final ReceiptRepository receiptRepository;
 
-    private final MenuRepository menuRepository;
-
-    public Orders order(OrderRequestDto orderRequestDto) {
+    public Orders order(OrderRequestDto orderRequestDto,
+                        Map<String, Integer> priceList) {
         Long memberId = orderRequestDto.getMemberId();
         Map<String, Integer> map = orderRequestDto.getMenu();
 
@@ -34,14 +33,6 @@ public class OrderService implements OrderServiceInterface{
                 .memberId(memberId)
                 .orderDate(LocalDateTime.now())
                 .build();
-
-        List<Coffee> coffeeList = menuRepository.findAll();
-
-        Map<String, Integer> priceList = new HashMap<>();
-        for (Coffee coffee : coffeeList) {
-            priceList.put(String.valueOf(coffee.getName()), coffee.getPrice());
-        }
-        log.info("menu {}{}",priceList, coffeeList);
 
         int totalPrice = 0;
         for (String coffeeName : map.keySet()) {

@@ -30,19 +30,15 @@ public class PointController {
 
     @ApiOperation("포인트 충전 API")
     @PostMapping("")
-    public ResponseEntity charge(PointRequestDto pointRequestDto) {
+    public PointResponseDto charge(@RequestBody PointRequestDto pointRequestDto) {
         Point point = pointService.charge(pointRequestDto);
-        return ResponseEntity.ok(new PointResponseDto(point));
+        return new PointResponseDto(point);
     }
 
     @ApiOperation("커피 결제 API")
     @GetMapping("/pay")
-    public ResponseEntity pay(OrderResponseDto orderResponseDto) {
-        Object obj = pointService.pay(orderResponseDto);
-        Object response = obj;
-        if(obj instanceof Point) {
-            response = new PointResponseDto((Point) obj);
-        }
-        return ResponseEntity.ok(response);
+    public PointResponseDto pay(OrderResponseDto orderResponseDto) {
+        Point point = pointService.pay(orderResponseDto);
+        return new PointResponseDto(point);
     }
 }

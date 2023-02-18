@@ -13,6 +13,7 @@ import java.util.Map;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Orders {
 
     @Builder

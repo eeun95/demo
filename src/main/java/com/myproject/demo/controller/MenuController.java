@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -20,7 +21,6 @@ import java.util.List;
 public class MenuController {
 
     private final MenuService menuService;
-
 
     @ApiOperation("커피 메뉴 목록 조회 API")
     @GetMapping("")
@@ -37,5 +37,9 @@ public class MenuController {
     @GetMapping("/hot")
     public List<String> hot() {
         return menuService.hot();
+    }
+
+    public Map<String, Integer> getMenuPrice() {
+        return menuService.getMenuPrice();
     }
 }
