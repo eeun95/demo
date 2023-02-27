@@ -25,7 +25,7 @@ public class OrderResponseDto {
 
     public Map<String, Integer> makeReceipt(List<Receipt> receipt) {
         Map<String, Integer> map = new HashMap<>();
-        for(Receipt r : receipt) {
+        for (Receipt r : receipt) {
             map.put(r.getCoffeeName(), r.getCount());
         }
         return map;

@@ -7,8 +7,8 @@ import jakarta.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.myproject.demo.domain.QOrders.orders;
-import static com.myproject.demo.domain.QReceipt.receipt;
+import static com.myproject.demo.domain.entity.QOrders.orders;
+import static com.myproject.demo.domain.entity.QReceipt.receipt;
 
 public class ReceiptRepositoryImpl implements ReceiptRepositoryCustom {
 

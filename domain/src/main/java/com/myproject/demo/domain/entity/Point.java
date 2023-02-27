@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Point {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
 
     private Long memberId;

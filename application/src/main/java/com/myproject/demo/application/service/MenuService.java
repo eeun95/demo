@@ -38,7 +38,7 @@ public class MenuService implements MenuServiceInterface {
         for (Coffee coffee : coffeeList) {
             priceList.put(String.valueOf(coffee.getName()), coffee.getPrice());
         }
-        log.info("menu {}{}",priceList, coffeeList);
+        log.info("menu {}{}", priceList, coffeeList);
         return priceList;
     }
 }

@@ -6,7 +6,8 @@ import jakarta.persistence.Id;
 
 //@Entity
 public class Member {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
 
     private Long pointId;

@@ -12,11 +12,12 @@ import java.util.Map;
 @Getter
 @Builder
 public class Receipt {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name="ORDERS_ID")
+    @JoinColumn(name = "ORDERS_ID")
     private Orders orders;
 
     private String coffeeName;

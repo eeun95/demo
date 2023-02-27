@@ -23,7 +23,8 @@ public class Orders {
         this.orderDate = orderDate;
     }
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
 
     private Long memberId;
@@ -38,6 +39,7 @@ public class Orders {
     public void setTotalPrice(int amount) {
         this.totalPrice = amount;
     }
+
     public void setReceipts(Receipt receipt) {
         getReceipts().add(receipt);
     }

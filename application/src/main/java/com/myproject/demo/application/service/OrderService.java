@@ -15,7 +15,7 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class OrderService implements OrderServiceInterface{
+public class OrderService implements OrderServiceInterface {
     private final OrderRepository orderRepository;
 
     private final ReceiptRepository receiptRepository;
@@ -32,7 +32,7 @@ public class OrderService implements OrderServiceInterface{
 
         int totalPrice = 0;
         for (String coffeeName : map.keySet()) {
-            int price = priceList.get(coffeeName)*map.get(coffeeName);
+            int price = priceList.get(coffeeName) * map.get(coffeeName);
             totalPrice += price;
             Receipt receipt = Receipt.builder()
                     .orders(orders)

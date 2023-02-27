@@ -10,5 +10,6 @@ import java.util.Optional;
 public interface PointRepository extends JpaRepository<Point, Long> {
 
     Point save(Point point);
+
     Optional<Point> findByMemberId(Long MemberId);
 }

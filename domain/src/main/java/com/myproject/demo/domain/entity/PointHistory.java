@@ -7,13 +7,14 @@ import lombok.Getter;
 @Entity
 @Getter
 @Builder
-@Table(name="point_history")
+@Table(name = "point_history")
 public class PointHistory {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="POINT_HISTORY_ID")
+    @JoinColumn(name = "POINT_HISTORY_ID")
     private Point point;
 
     private int chargePoint;

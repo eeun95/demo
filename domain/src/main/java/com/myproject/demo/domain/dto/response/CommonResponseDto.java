@@ -11,6 +11,7 @@ public class CommonResponseDto<T> {
         this.code = code;
         this.resultMessage = code.getMessage();
     }
+
     public CommonResponseDto(ResultCodeEnum code, T data) {
         this.code = code;
         this.resultMessage = code.getMessage();
