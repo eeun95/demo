@@ -1,5 +1,6 @@
 package com.myproject.demo.domain.dto.response;
 
+import com.myproject.demo.domain.dto.presentation.PointServiceDto;
 import com.myproject.demo.domain.entity.Orders;
 import com.myproject.demo.domain.entity.Receipt;
 import lombok.Data;
@@ -29,5 +30,14 @@ public class OrderResponseDto {
             map.put(r.getCoffeeName(), r.getCount());
         }
         return map;
+    }
+
+    public PointServiceDto toServiceDto() {
+        return PointServiceDto.builder()
+                .memberId(this.memberId)
+                .receipt(this.receipt)
+                .totalPrice(this.totalPrice)
+                .orderDate(this.orderDate)
+                .build();
     }
 }

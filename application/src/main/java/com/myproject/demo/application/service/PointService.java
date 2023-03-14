@@ -2,6 +2,7 @@ package com.myproject.demo.application.service;
 
 import com.myproject.demo.application.exception.LackOfPointException;
 import com.myproject.demo.application.exception.MemberNotFoundException;
+import com.myproject.demo.domain.dto.presentation.PointServiceDto;
 import com.myproject.demo.domain.entity.Point;
 import com.myproject.demo.domain.entity.PointHistory;
 import com.myproject.demo.domain.repository.point.PointHistoryRepository;
@@ -23,7 +24,7 @@ public class PointService implements PointServiceInterface {
 
     private final PointHistoryRepository pointHistoryRepository;
 
-    public Point charge(PointRequestDto pointRequestDto) {
+    public Point charge(PointServiceDto pointRequestDto) {
         Long memberId = pointRequestDto.getMemberId();
         Optional<Point> point = pointRepository.findByMemberId(memberId);
 
@@ -50,7 +51,7 @@ public class PointService implements PointServiceInterface {
         return savePoint;
     }
 
-    public Point pay(OrderResponseDto orderResponseDto) {
+    public Point pay(PointServiceDto orderResponseDto) {
         Long memberId = orderResponseDto.getMemberId();
         int totalPrice = orderResponseDto.getTotalPrice();
         Optional<Point> pointObj = pointRepository.findByMemberId(memberId);

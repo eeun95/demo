@@ -27,14 +27,14 @@ public class PointController {
     @ApiOperation("포인트 충전 API")
     @PostMapping("")
     public PointResponseDto charge(@RequestBody PointRequestDto pointRequestDto) {
-        Point point = pointService.charge(pointRequestDto);
+        Point point = pointService.charge(pointRequestDto.toServiceDto());
         return new PointResponseDto(point);
     }
 
     @ApiOperation("커피 결제 API")
     @GetMapping("/pay")
     public PointResponseDto pay(OrderResponseDto orderResponseDto) {
-        Point point = pointService.pay(orderResponseDto);
+        Point point = pointService.pay(orderResponseDto.toServiceDto());
         return new PointResponseDto(point);
     }
 }
