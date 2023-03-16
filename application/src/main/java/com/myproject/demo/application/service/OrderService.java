@@ -1,5 +1,6 @@
 package com.myproject.demo.application.service;
 
+import com.myproject.demo.domain.dto.presentation.OrderServiceDto;
 import com.myproject.demo.domain.entity.Orders;
 import com.myproject.demo.domain.entity.Receipt;
 import com.myproject.demo.domain.repository.OrderRepository;
@@ -20,7 +21,7 @@ public class OrderService implements OrderServiceInterface {
 
     private final ReceiptRepository receiptRepository;
 
-    public Orders order(OrderRequestDto orderRequestDto,
+    public Orders order(OrderServiceDto orderRequestDto,
                         Map<String, Integer> priceList) {
         Long memberId = orderRequestDto.getMemberId();
         Map<String, Integer> map = orderRequestDto.getMenu();

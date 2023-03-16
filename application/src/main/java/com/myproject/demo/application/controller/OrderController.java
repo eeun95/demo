@@ -25,7 +25,7 @@ public class OrderController {
     @ApiOperation("커피 주문 API")
     @PostMapping("")
     public PointResponseDto order(@RequestBody OrderRequestDto orderRequestDto) {
-        Orders orders = orderService.order(orderRequestDto, menuController.getMenuPrice());
+        Orders orders = orderService.order(orderRequestDto.toServiceDto(), menuController.getMenuPrice());
         OrderResponseDto response = new OrderResponseDto(orders);
 
         PointResponseDto pointResponseDto = pointController.pay(response);
