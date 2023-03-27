@@ -4,10 +4,14 @@ import com.myproject.demo.domain.dto.presentation.OrderServiceDto;
 import com.myproject.demo.domain.entity.Orders;
 import com.myproject.demo.domain.entity.Receipt;
 import com.myproject.demo.domain.repository.OrderRepository;
+import com.myproject.demo.domain.repository.RedisRepository;
 import com.myproject.demo.domain.repository.receipt.ReceiptRepository;
 import com.myproject.demo.domain.dto.request.OrderRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,6 +24,8 @@ public class OrderService implements OrderServiceInterface {
     private final OrderRepository orderRepository;
 
     private final ReceiptRepository receiptRepository;
+
+    private final RedisRepository redisRepository;
 
     public Orders order(OrderServiceDto orderRequestDto,
                         Map<String, Integer> priceList) {
@@ -42,6 +48,9 @@ public class OrderService implements OrderServiceInterface {
                     .price(price)
                     .build();
             receiptRepository.save(receipt);
+            // redis 에 저장
+            int redisCount = redisRepository.getScore("hot", coffeeName);
+            redisRepository.saveRedis(coffeeName, map.get(coffeeName)+redisCount);
             orders.setReceipts(receipt);
         }
         orders.setTotalPrice(totalPrice);

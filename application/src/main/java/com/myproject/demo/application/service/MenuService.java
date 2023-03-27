@@ -2,6 +2,7 @@ package com.myproject.demo.application.service;
 
 import com.myproject.demo.domain.entity.menu.Coffee;
 import com.myproject.demo.domain.repository.MenuRepository;
+import com.myproject.demo.domain.repository.RedisRepository;
 import com.myproject.demo.domain.repository.receipt.ReceiptRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,13 +22,20 @@ public class MenuService implements MenuServiceInterface {
 
     private final ReceiptRepository receiptRepository;
 
+    private final RedisRepository redisRepository;
+
     public List<Coffee> show() {
         return menuRepository.findAll();
     }
 
-    public List<String> hot() {
+    public List<String> hot7() {
         List<String> coffeeList = receiptRepository.showHotMenu(LocalDateTime.now().minusDays(7), LocalDateTime.now());
         log.info("hotMenu {}", coffeeList);
+        return coffeeList;
+    }
+
+    public List<String> hot() {
+        List coffeeList = redisRepository.getValueList("hot", 3);
         return coffeeList;
     }
 

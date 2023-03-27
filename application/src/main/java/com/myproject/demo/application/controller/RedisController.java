@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @RestController
 @Slf4j
 public class RedisController {
@@ -47,8 +52,10 @@ public class RedisController {
     @GetMapping("/redisTest2/{key}")
     public CommonResponseDto getRedisKey2(@PathVariable String key) {
         ZSetOperations<String, String> op = redisTemplate.opsForZSet();
-        log.info("randomMember {}", op.randomMember("hot"));
-        return new CommonResponseDto(ResultCodeEnum.SUCCESS);
+        Set<ZSetOperations.TypedTuple<String>> tupleSet = op.reverseRangeWithScores("hot", 0, 2);
+        log.info("zrevrange {}", tupleSet);
+        List<String> list = tupleSet.stream().map(ZSetOperations.TypedTuple::getValue).collect(Collectors.toList());
+        return new CommonResponseDto(ResultCodeEnum.SUCCESS, list);
     }
 
 }

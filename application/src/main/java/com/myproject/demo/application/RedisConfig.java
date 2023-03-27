@@ -1,6 +1,7 @@
 package com.myproject.demo.application;
 
 
+import com.myproject.demo.domain.repository.RedisRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

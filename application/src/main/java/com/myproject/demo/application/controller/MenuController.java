@@ -34,6 +34,12 @@ public class MenuController {
     }
 
     @ApiOperation("인기메뉴 목록 조회 API")
+    @GetMapping("/hot7")
+    public List<String> hot7() {
+        return menuService.hot();
+    }
+
+    @ApiOperation("인기메뉴 목록 조회 API")
     @GetMapping("/hot")
     public List<String> hot() {
         return menuService.hot();
